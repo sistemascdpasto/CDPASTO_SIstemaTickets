@@ -4,11 +4,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TicketAttachmentController;
 use App\Http\Controllers\TicketCommentController;
 use App\Http\Controllers\TicketController;
+use App\Models\Software;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('welcome', [
+        'softwares' => Software::query()->active()->orderBy('name')->pluck('name'),
+    ]);
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {

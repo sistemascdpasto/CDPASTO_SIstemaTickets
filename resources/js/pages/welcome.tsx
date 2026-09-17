@@ -36,9 +36,11 @@ const steps = [
     { n: '03', title: 'Haz seguimiento', text: 'Ves cada avance en la línea de tiempo hasta que se resuelve.', dir: 'up' as const },
 ];
 
-const systems = ['Sistema Administrativo', 'Sistema de Gestión', 'Sistema de Inventarios', 'Recursos Humanos', 'Portal de Clientes', 'Otros sistemas'];
+interface WelcomeProps {
+    softwares: string[];
+}
 
-export default function Welcome() {
+export default function Welcome({ softwares }: WelcomeProps) {
     const { auth } = usePage<SharedData>().props;
     const panelHref = auth.user ? (auth.user.is_admin ? '/admin/dashboard' : '/dashboard') : route('login');
     const ctaHref = auth.user ? (auth.user.is_admin ? '/admin/dashboard' : '/tickets/create') : route('login');
@@ -148,17 +150,19 @@ export default function Welcome() {
                         </AnimatedContent>
                     </div>
 
-                    {/* Systems marquee */}
-                    <div className="relative border-y border-border bg-background/60 py-4 backdrop-blur">
-                        <Marquee
-                            items={systems.map((s) => (
-                                <span className="inline-flex items-center gap-2">
-                                    <span className="size-1.5 rounded-full bg-primary/60" />
-                                    {s}
-                                </span>
-                            ))}
-                        />
-                    </div>
+                    {/* Softwares marquee */}
+                    {softwares.length > 0 && (
+                        <div className="relative border-y border-border bg-background/60 py-4 backdrop-blur">
+                            <Marquee
+                                items={softwares.map((s) => (
+                                    <span className="inline-flex items-center gap-2">
+                                        <span className="size-1.5 rounded-full bg-primary/60" />
+                                        {s}
+                                    </span>
+                                ))}
+                            />
+                        </div>
+                    )}
                 </section>
 
                 {/* Features — MagicBento */}
