@@ -15,6 +15,7 @@
         "ext-mbstring": "*",
         "ext-xml": "*",
         "ext-zip": "*",
+        "cdpasto/nexus-agent": "^1.1",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -80,5 +81,14 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "nexus-agent": {
+            "type": "path",
+            "url": "packages/nexus-agent",
+            "options": {
+                "symlink": false
+            }
+        }
+    }
 }
